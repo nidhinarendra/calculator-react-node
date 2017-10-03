@@ -3,7 +3,7 @@ import './index.css';
 
 class App extends React.Component {
   state = {
-    users: [],
+    value: null,
     shownValue: '0',
     waitingForNext: false,
     operator: null
@@ -16,14 +16,12 @@ class App extends React.Component {
         shownValue: '.',
         waitingForNext: false
       });
+    } else if (shownValue.indexOf('.') === -1) {
+      this.setState({
+        shownValue: shownValue + '.'
+      });
     } else {
-      if (shownValue.indexOf('.') === -1) {
-        this.setState({
-          shownValue: shownValue + '.'
-        });
-      } else {
-        alert('You cannot have more than one decimal point');
-      }
+      alert('You cannot have more than one decimal point');
     }
   }
 
@@ -47,10 +45,34 @@ class App extends React.Component {
     }
   }
 
-  operation(operator) {
+  operation(nextOperator) {
+    const { shownValue, operator, value } = this.state;
+    const operations = {
+      '/': (prevValue, nextValue) => prevValue / nextValue,
+      '+': (prevValue, nextValue) => prevValue + nextValue,
+      '-': (prevValue, nextValue) => prevValue - nextValue,
+      '*': (prevValue, nextValue) => prevValue * nextValue,
+      '=': (prevValue, nextValue) => nextValue
+    };
+
+    const nextValue = parseFloat(shownValue);
+
+    if (value == null) {
+      this.setState({
+        value: nextValue
+      });
+    } else if (operator) {
+      const currentValue = value || 0;
+      const result = operations[operator](currentValue, nextValue);
+      this.setState({
+        value: result,
+        shownValue: String(result)
+      });
+    }
+
     this.setState({
       waitingForNext: true,
-      operator: operator
+      operator: nextOperator
     });
   }
 
@@ -171,12 +193,6 @@ class App extends React.Component {
               =
             </button>
           </div>
-        </div>
-        <div className="App">
-          <h1>Users</h1>
-          {this.state.users.map(user => (
-            <div key={user.id}>{user.username}</div>
-          ))}
         </div>
       </div>
     );
