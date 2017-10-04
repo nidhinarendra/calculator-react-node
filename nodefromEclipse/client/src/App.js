@@ -51,9 +51,7 @@ class App extends React.Component {
     const operations = {
       '+': (prevValue, nextValue) => {
         axios
-          .get(
-            'addition' + '?' + 'num1=' + prevValue + '&' + 'num2=' + nextValue
-          )
+          .get('addition?num1=' + prevValue + '&num2=' + nextValue)
           .then(result => {
             console.log(result.data);
             this.setState({
@@ -63,15 +61,7 @@ class App extends React.Component {
       },
       '-': (prevValue, nextValue) => {
         axios
-          .get(
-            'subtraction' +
-              '?' +
-              'num1=' +
-              prevValue +
-              '&' +
-              'num2=' +
-              nextValue
-          )
+          .get('subtraction?num1=' + prevValue + '&num2=' + nextValue)
           .then(result => {
             console.log(result.data);
             this.setState({
@@ -81,9 +71,7 @@ class App extends React.Component {
       },
       '/': (prevValue, nextValue) => {
         axios
-          .get(
-            'division' + '?' + 'num1=' + prevValue + '&' + 'num2=' + nextValue
-          )
+          .get('division?num1=' + prevValue + '&num2=' + nextValue)
           .then(result => {
             console.log(result.data);
             this.setState({
@@ -93,15 +81,7 @@ class App extends React.Component {
       },
       '*': (prevValue, nextValue) => {
         axios
-          .get(
-            'multiplication' +
-              '?' +
-              'num1=' +
-              prevValue +
-              '&' +
-              'num2=' +
-              nextValue
-          )
+          .get('multiplication?num1=' + prevValue + '&num2=' + nextValue)
           .then(result => {
             console.log(result.data);
             this.setState({
