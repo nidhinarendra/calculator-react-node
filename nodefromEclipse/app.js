@@ -11,7 +11,7 @@ var express = require('express'),
 var app = express();
 
 // all environments
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 3030);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.use(express.favicon());
@@ -32,8 +32,32 @@ app.get('/', function(req, res) {
   res.sendfile('routes/index.html');
 });
 
-app.get('/addition', function(req, res) {
-  res.sendfile('routes/add.html');
+app.get('/addition*', function(req, res) {
+  var num1 = req.param('num1');
+  var num2 = req.param('num2');
+  var result = +num1 + +num2;
+  res.send('' + result);
+});
+
+app.get('/subtraction*', function(req, res) {
+  var num1 = req.param('num1');
+  var num2 = req.param('num2');
+  var result = +num1 - +num2;
+  res.send('' + result);
+});
+
+app.get('/multiplication*', function(req, res) {
+  var num1 = req.param('num1');
+  var num2 = req.param('num2');
+  var result = +num1 * +num2;
+  res.send('' + result);
+});
+
+app.get('/division*', function(req, res) {
+  var num1 = req.param('num1');
+  var num2 = req.param('num2');
+  var result = +num1 / +num2;
+  res.send('' + result);
 });
 
 http.createServer(app).listen(app.get('port'), function() {

@@ -1,5 +1,6 @@
 import React from 'react';
 import './index.css';
+import axios from 'axios';
 
 class App extends React.Component {
   state = {
@@ -48,12 +49,73 @@ class App extends React.Component {
   operation(nextOperator) {
     const { shownValue, operator, value } = this.state;
     const operations = {
-      '/': (prevValue, nextValue) => prevValue / nextValue,
-      '+': (prevValue, nextValue) => prevValue + nextValue,
-      '-': (prevValue, nextValue) => prevValue - nextValue,
-      '*': (prevValue, nextValue) => prevValue * nextValue,
-      '=': (prevValue, nextValue) => nextValue
+      '+': (prevValue, nextValue) => {
+        axios
+          .get(
+            'addition' + '?' + 'num1=' + prevValue + '&' + 'num2=' + nextValue
+          )
+          .then(result => {
+            console.log(result.data);
+            this.setState({
+              shownValue: result.data
+            });
+          });
+      },
+      '-': (prevValue, nextValue) => {
+        axios
+          .get(
+            'subtraction' +
+              '?' +
+              'num1=' +
+              prevValue +
+              '&' +
+              'num2=' +
+              nextValue
+          )
+          .then(result => {
+            console.log(result.data);
+            this.setState({
+              shownValue: result.data
+            });
+          });
+      },
+      '/': (prevValue, nextValue) => {
+        axios
+          .get(
+            'division' + '?' + 'num1=' + prevValue + '&' + 'num2=' + nextValue
+          )
+          .then(result => {
+            console.log(result.data);
+            this.setState({
+              shownValue: result.data
+            });
+          });
+      },
+      '*': (prevValue, nextValue) => {
+        axios
+          .get(
+            'multiplication' +
+              '?' +
+              'num1=' +
+              prevValue +
+              '&' +
+              'num2=' +
+              nextValue
+          )
+          .then(result => {
+            console.log(result.data);
+            this.setState({
+              shownValue: result.data
+            });
+          });
+      }
     };
+
+    // '/': (prevValue, nextValue) => prevValue / nextValue,
+    // '+': (prevValue, nextValue) => prevValue + nextValue,
+    // '-': (prevValue, nextValue) => prevValue - nextValue,
+    // '*': (prevValue, nextValue) => prevValue * nextValue,
+    // '=': (prevValue, nextValue) => nextValue
 
     const nextValue = parseFloat(shownValue);
 
