@@ -91,12 +91,6 @@ class App extends React.Component {
       }
     };
 
-    // '/': (prevValue, nextValue) => prevValue / nextValue,
-    // '+': (prevValue, nextValue) => prevValue + nextValue,
-    // '-': (prevValue, nextValue) => prevValue - nextValue,
-    // '*': (prevValue, nextValue) => prevValue * nextValue,
-    // '=': (prevValue, nextValue) => nextValue
-
     const nextValue = parseFloat(shownValue);
 
     if (value == null) {
@@ -122,7 +116,6 @@ class App extends React.Component {
     const { shownValue } = this.state;
     return (
       <div className="calculator">
-        <pre>{JSON.stringify(this.state, null, 2)}</pre>
         <div className="calculator-display">{shownValue}</div>
         <div className="calculator-keypad">
           <div className="input-keys">
